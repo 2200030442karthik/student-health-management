@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health Game</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(120deg, #9ad2ff, #c4e0fa, #1b44e7);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        header h1 {
+            font-size: 36px;
+            color: #003366;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        main {
+            text-align: center;
+            background: rgba(14, 193, 217, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        main p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 100px);
+            grid-template-rows: repeat(4, 100px);
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            width: 100px;
+            height: 100px;
+            background-color: #d2e4ff;
+            border: 2px solid #9fccfc;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            color: transparent;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .flipped {
+            background-color: #faf3dd;
+            color: #333;
+            transform: scale(1.05);
+        }
+
+        .matched {
+            background-color: #c5e1a5;
+            color: white;
+        }
+
+        button {
+            background-color: #003366;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #fcb69f;
+            transform: translateY(-3px);
+        }
+    </style>
+    <script>
+        let firstCard, secondCard;
+        let hasFlippedCard = false;
+        let lockBoard = false;
+        let matchCount = 0;
+
+        function flipCard() {
+            if (lockBoard) return;
+            if (this === firstCard) return;
+
+            this.classList.add('flipped');
+
+            if (!hasFlippedCard) {
+                hasFlippedCard = true;
+                firstCard = this;
+                return;
+            }
+
+            secondCard = this;
+            checkForMatch();
+        }
+
+        function checkForMatch() {
+            if (firstCard.dataset.value === secondCard.dataset.value) {
+                disableCards();
+                matchCount++;
+
+                if (matchCount === 8) {
+                    setTimeout(() => {
+                        alert('Congrats! You’ve matched all cards!');
+                    }, 500);
+                }
+            } else {
+                unflipCards();
+            }
+        }
+
+        function disableCards() {
+            firstCard.classList.add('matched');
+            secondCard.classList.add('matched');
+            resetBoard();
+        }
+
+        function unflipCards() {
+            lockBoard = true;
+
+            setTimeout(() => {
+                firstCard.classList.remove('flipped');
+                secondCard.classList.remove('flipped');
+                resetBoard();
+            }, 1500);
+        }
+
+        function resetBoard() {
+            [hasFlippedCard, lockBoard] = [false, false];
+            [firstCard, secondCard] = [null, null];
+        }
+
+        function startGame() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                const randomPos = Math.floor(Math.random() * 16);
+                card.style.order = randomPos;
+                card.addEventListener('click', flipCard);
+            });
+        }
+
+        window.onload = startGame;
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Focus Memory Game</h1>
+    </header>
+    <main>
+        <p>Click on the cards to find matching pairs and complete the game!</p>
+        <div class="game-board">
+            <div class="card" data-value="1"></div>
+            <div class="card" data-value="2"></div>
+            <div class="card" data-value="3"></div>
+            <div class="card" data-value="4"></div>
+            <div class="card" data-value="5"></div>
+            <div class="card" data-value="6"></div>
+            <div class="card" data-value="7"></div>
+            <div class="card" data-value="8"></div>
+            <div class="card" data-value="1"></div>
+            <div class="card" data-value="2"></div>
+            <div class="card" data-value="3"></div>
+            <div class="card" data-value="4"></div>
+            <div class="card" data-value="5"></div>
+            <div class="card" data-value="6"></div>
+            <div class="card" data-value="7"></div>
+            <div class="card" data-value="8"></div>
+        </div>
+
+        <button onclick="location.href='index.html'">Back to Home</button>
+    </main>
+</body>
+</html>

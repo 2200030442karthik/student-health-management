@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor List</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #85FFBD, #FFFB7D);
+            color: #333;
+        }
+
+        header {
+            background-color: #003366;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        header h1 {
+            color: #FFFB7D;
+            font-size: 36px;
+            letter-spacing: 2px;
+            font-family: 'Georgia', serif;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            padding: 0;
+            margin: 10px 0;
+        }
+
+        nav ul li {
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #FFFB7D;
+            font-weight: bold;
+            font-size: 18px;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+            padding: 10px 25px;
+            border-radius: 25px;
+        }
+
+        nav ul li a:hover {
+            background-color: #FFFB7D;
+            color: #003366;
+            transform: translateY(-3px);
+        }
+
+        main {
+            text-align: center;
+            padding: 60px 20px;
+            background: radial-gradient(circle, #fff, #F0F8FF);
+            min-height: calc(100vh - 100px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        section {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            max-width: 700px;
+            width: 100%;
+            animation: fadeIn 1s ease-out;
+        }
+
+        h2 {
+            font-size: 30px;
+            color: #003366;
+            margin-bottom: 30px;
+            font-family: 'Georgia', serif;
+            letter-spacing: 1px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto 20px auto;
+            font-size: 18px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 2px solid #f1f1f1;
+        }
+
+        th {
+            background-color: #003366;
+            color: #FFFB7D;
+            text-transform: uppercase;
+        }
+
+        td {
+            background-color: #f9f9f9;
+            transition: background-color 0.3s ease;
+        }
+
+        tr:hover td {
+            background-color: #FFFB7D;
+            color: #003366;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 12px 30px;
+            background-color: #003366;
+            color: #FFFB7D;
+            border: none;
+            border-radius: 30px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #FFFB7D;
+            color: #003366;
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 30px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            table {
+                font-size: 16px;
+            }
+
+            th, td {
+                padding: 10px;
+            }
+
+            button {
+                width: 100%;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Doctor List</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Available Doctors</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Doctor</th>
+                        <th>Specialty</th>
+                        <th>Available Dates</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Dr. Doondi</td>
+                        <td>Psychologist</td>
+                        <td>
+                            <ul>
+                                <li>2024-10-15</li>
+                                <li>2024-10-16</li>
+                            </ul>
+                        </td>
+                        <td><a href="book-appointment.html?doctor=Dr.%20Smith&specialty=Psychologist&date=2024-10-15"><button>Book Appointment</button></a></td>
+                    </tr>
+                    <tr>
+                        <td>Dr. Johnson</td>
+                        <td>Psychoanalyst</td>
+                        <td>
+                            <ul>
+                                <li>2024-10-14</li>
+                                <li>2024-10-18</li>
+                            </ul>
+                        </td>
+                        <td><a href="book-appointment.html?doctor=Dr.%20Johnson&specialty=Psychoanalyst&date=2024-10-14"><button>Book Appointment</button></a></td>
+                    </tr>
+                    <tr>
+                        <td>Dr. Lee</td>
+                        <td>Therapist</td>
+                        <td>
+                            <ul>
+                                <li>2024-10-16</li>
+                                <li>2024-10-17</li>
+                            </ul>
+                        </td>
+                        <td><a href="book-appointment.html?doctor=Dr.%20Lee&specialty=Therapist&date=2024-10-16"><button>Book Appointment</button></a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="back-button" onclick="location.href='index.html'">Back to Home</button>
+        </section>
+    </main>
+</body>
+</html>

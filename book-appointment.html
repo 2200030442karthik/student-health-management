@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment</title>
+    <style>
+        /* Global Styles */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        header {
+            background-color: #003366;
+            color: white;
+            padding: 30px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 36px;
+            font-family: 'Verdana', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        main {
+            flex: 1;
+            text-align: center;
+            padding: 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        h2 {
+            font-size: 30px;
+            color: #003366;
+            margin-bottom: 30px;
+            letter-spacing: 0.5px;
+        }
+
+        p {
+            font-size: 20px;
+            margin: 15px 0;
+        }
+
+        span {
+            font-weight: bold;
+            color: #003366;
+        }
+
+        h3 {
+            font-size: 24px;
+            margin-top: 40px;
+            color: #003366;
+        }
+
+        /* List Styles for Time Slots */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0;
+            font-size: 18px;
+        }
+
+        li {
+            padding: 10px;
+            color: #333;
+            background-color: #f0f0f0;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Button Styles */
+        a {
+            text-decoration: none;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #003366;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #00aaff;
+            color: #fff;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            main {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            h2 {
+                font-size: 26px;
+            }
+
+            p {
+                font-size: 18px;
+            }
+
+            h3 {
+                font-size: 22px;
+            }
+
+            button {
+                width: 100%;
+                font-size: 16px;
+            }
+        }
+    </style>
+    <script>
+        // Function to get URL parameters
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Function to display available time slots
+        function displaySlots() {
+            const doctor = getQueryParam('doctor');
+            const specialty = getQueryParam('specialty');
+            const date = getQueryParam('date');
+            
+            document.getElementById('doctor-name').textContent = doctor;
+            document.getElementById('doctor-specialty').textContent = specialty;
+            document.getElementById('appointment-date').textContent = date;
+
+            // Example time slots
+            const timeSlots = [
+                '9:00 AM',
+                '10:00 AM',
+                '11:00 AM',
+                '1:00 PM',
+                '2:00 PM'
+            ];
+
+            const slotsContainer = document.getElementById('time-slots');
+            timeSlots.forEach(slot => {
+                const slotElement = document.createElement('li');
+                slotElement.innerHTML = `${slot} <button onclick="confirmSlot('${slot}')">Confirm</button>`;
+                slotsContainer.appendChild(slotElement);
+            });
+        }
+
+        // Function to confirm appointment and redirect to confirmation page
+        function confirmSlot(time) {
+            const doctor = getQueryParam('doctor');
+            const specialty = getQueryParam('specialty');
+            const date = getQueryParam('date');
+            window.location.href = `confirmation.html?doctor=${doctor}&specialty=${specialty}&date=${date}&time=${time}`;
+        }
+    </script>
+</head>
+<body onload="displaySlots()">
+    <header>
+        <h1>Book Appointment</h1>
+    </header>
+    <main>
+        <h2>Appointment Details</h2>
+        <p>Doctor: <span id="doctor-name"></span></p>
+        <p>Specialty: <span id="doctor-specialty"></span></p>
+        <p>Date: <span id="appointment-date"></span></p>
+
+        <h3>Available Time Slots:</h3>
+        <ul id="time-slots"></ul>
+
+        <button onclick="location.href='index.html'">Back to Home</button>
+    </main>
+</body>
+</html>
